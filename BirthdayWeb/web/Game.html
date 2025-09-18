@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Click the Heart Game 💖</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(255, 230, 240, 0.85), rgba(255, 230, 240, 0.85)),
+                        url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .game-section {
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 700px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #d60087;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        #score, #timer {
+            font-size: 1.5em;
+            margin: 5px;
+            color: #ff5cad;
+        }
+
+        #game-area {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 5px solid #ffb6c1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255,105,180,0.5);
+            margin: 0 auto;
+        }
+
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+            background-size: cover;
+            cursor: pointer;
+            animation: pop 0.6s ease;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .btn-pink-cute {
+            background: linear-gradient(90deg, #ff9ec4, #ff5cad);
+            color: white;
+            padding: 12px 25px;
+            border: none; /* Menghilangkan border default */
+            border-radius: 50px;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 92, 173, 0.5);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-pink-cute:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 92, 173, 0.7);
+            text-decoration: none;
+            color: #d10072;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-section">
+        <h1>💖 Click the Heart! 💖</h1>
+        <div id="score">Score: 0</div>
+        <div id="timer">Time: 30s</div>
+        <div id="game-area"></div>
+        <button id="start-btn" class="btn-pink-cute"> Start Game </button>
+        <a href="gallery.jsp" class="btn-pink-cute"> Back to Gallery </a>
+    </div>
+
+    <script>
+        const gameArea = document.getElementById('game-area');
+        const scoreDisplay = document.getElementById('score');
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('start-btn');
+
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let heartInterval;
+
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            scoreDisplay.textContent = 'Score: 0';
+            timerDisplay.textContent = 'Time: 30s';
+            gameArea.innerHTML = '';
+            startBtn.disabled = true;
+
+            heartInterval = setInterval(spawnHeart, 800);
+            gameInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `Time: ${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            clearInterval(heartInterval);
+            gameArea.innerHTML = '';
+            alert(`Game Over! 🎉 Your score: ${score}`);
+            startBtn.disabled = false;
+        }
+
+        function spawnHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+            const maxX = gameArea.clientWidth - 50;
+            const maxY = gameArea.clientHeight - 50;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            heart.style.left = `${randomX}px`;
+            heart.style.top = `${randomY}px`;
+
+            heart.addEventListener('click', () => {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                heart.remove();
+            });
+
+            gameArea.appendChild(heart);
+
+            // Auto remove after 1.5s
+            setTimeout(() => {
+                heart.remove();
+            }, 1500);
+        }
+
+        startBtn.addEventListener('click', startGame);
+    </script>
+
+</body>
+</html>
