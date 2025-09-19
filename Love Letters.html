@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://localhost:8080/BirthdayWeb/letter.jsp -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Untuk responsif -->
+    <title>Love Letters</title>
+    <link href="./Love Letters_files/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(rgba(255, 230, 240, 0.85), rgba(255, 230, 240, 0.85)),
+                        url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #d10072;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+        .love-box {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .letter-button {
+            background: #ffe6f0;
+            border: none;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            color: #d10072;
+            font-weight: bold;
+            width: 100%;
+            text-align: left;
+            transition: background 0.3s;
+        }
+        .letter-button:hover {
+            background: #ffd1ea;
+        }
+        .heart-icon {
+            color: #ff66a3;
+            font-size: 1.5rem;
+            margin-right: 8px;
+        }
+        .modal-content {
+            border-radius: 20px;
+        }
+        .btn-close {
+            background-color: #ffb6c1;
+        }
+        .btn-skip {
+            background-color: #ffe6f0;
+            color: #d10072;
+            border: none;
+        }
+        .btn-skip:hover {
+            background-color: #ffd1ea;
+        }
+
+        /* Media Queries untuk Mobile (< 768px) */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .love-box {
+                max-width: 90%;
+                padding: 15px;
+            }
+
+            .letter-button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .modal-dialog {
+                max-width: 90%;
+            }
+
+            .modal-body {
+                font-size: 14px;
+            }
+
+            .text-center.mt-4 .btn-pink-cute {
+                font-size: 16px;
+                padding: 10px 20px;
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-title">
+        Happy Birthday! 💝
+    </div>
+
+    <img src="./Love Letters_files/a0ae1f14dfa0a9d93bb37d7f5973a446.gif" alt="Love Bear" width="150" class="my-4">
+
+    <div class="love-box">
+        <h4><span class="heart-icon">💗</span>Love Letters</h4>
+
+        <button class="letter-button" onclick="openLetter(&#39;My Love&#39;, &#39;Selamat ulang tahun sayangkuu. Tak terasa Waktu begitu cepat berlalu,\n di hari spesial ini, aku ucapkan selamat dan harapan terbaik buat kamu.\n Semoga tahun ini dan tahun-tahun selanjutnya membawa kebahagiaan, kesehatan,\n dan cinta yang lebih dalam buat kita berdua. Terima kasii suda jadi pacar yang luar biasa.\n Love you in every universe&#39;)">
+            My Love<br><small>Click to open</small>
+        </button>
+
+        <button class="letter-button" onclick="openLetter(&#39;My Forever Love&#39;, &#39;Aku memohon maaf sayang, karena sudah mengkhianati kepercayaanmu,\n yang menggores luka di kanvas cinta kita.\n Cahaya percaya redup di tanganku,\n penyesalan berbisik dalam sunyi malam.\n\n Cinta kita kini seperti daun yang layu,\n terpuruk oleh langkahku yang keliru.\n Tapi akarnya masih hidup, aku yakin,\n kita bisa tumbuh lagi di hari yang baru.\n\n Aku tersesat, tapi kini kembali,\n janji kita masih bernyanyi di hati.\n Bulan menyaksikan tekadku berubah,\n engkau tetap cahaya yang kuharapkan.\n\n Oh, cinta abadiku, terima tangisku,\n aku mohon ampun untuk menyembuhkan.\n Dengan harapan kecil aku berjanji,\n semoga kamu dapat menerimaku kembali.&#39;)">
+            My Forever Love<br><small>Click to open</small>
+        </button>
+    </div>
+
+    <!-- Modal Surat -->
+    <div class="modal fade" id="letterModal" tabindex="-1" aria-labelledby="letterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="letterModalLabel">Letter Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="letterContent">
+                    Letter content here...
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-skip">Skip typing</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tombol ke Gallery -->
+    <div class="text-center mt-4">
+        <a href="http://localhost:8080/BirthdayWeb/gallery.jsp" class="btn btn-pink-cute">
+            View Our Memories 
+        </a>
+    </div>
+
+    <style>
+        .btn-pink-cute {
+            background: linear-gradient(90deg, #ff9ec4, #ff5cad);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 92, 173, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-pink-cute:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 92, 173, 0.7);
+            text-decoration: none;
+            color: #d10072;
+        }
+    </style>
+
+    <script src="./Love Letters_files/bootstrap.bundle.min.js.download"></script>
+    <script>
+    let typingTimer; // Untuk simpan ID interval
+    let typingIndex = 0;
+    let fullContent = "";
+
+    function openLetter(title, content) {
+        document.getElementById("letterModalLabel").textContent = title;
+
+        const letterContent = document.getElementById("letterContent");
+        letterContent.textContent = "";
+        fullContent = content;
+        typingIndex = 0;
+
+        const modal = new bootstrap.Modal(document.getElementById('letterModal'));
+        modal.show();
+
+        // Mulai animasi ketik setelah modal muncul
+        setTimeout(startTyping, 200);
+    }
+
+    function startTyping() {
+        const letterContent = document.getElementById("letterContent");
+
+        typingTimer = setInterval(() => {
+            if (typingIndex < fullContent.length) {
+                letterContent.textContent += fullContent.charAt(typingIndex);
+                typingIndex++;
+            } else {
+                clearInterval(typingTimer); // Hentikan jika sudah selesai
+            }
+        }, 30); // Ubah angka ini untuk kecepatan (ms)
+    }
+
+    // Fungsi skip ketik
+    function skipTyping() {
+        clearInterval(typingTimer); // Hentikan animasi
+        document.getElementById("letterContent").textContent = fullContent;
+    }
+
+    // Tombol "Skip typing" dipanggil saat diklik
+    document.addEventListener("DOMContentLoaded", function () {
+        const skipButton = document.querySelector(".btn-skip");
+        skipButton.addEventListener("click", skipTyping);
+    });
+    </script>
+
+</body></html>
