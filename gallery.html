@@ -48,6 +48,11 @@
       width: 100%;
       transition: transform 0.6s ease;
     }
+    #memoriesCarousel .carousel-item:nth-child(8) .memory-img,
+        #memoriesCarousel .carousel-item:nth-child(10) .memory-img {
+            object-fit: cover;
+            object-position: 0 80%;
+    }
     .memory-card::after {
       content: "";
       position: absolute;
@@ -217,16 +222,22 @@
   </div>
 
   <!-- Player -->
-  <div class="player-section">
-    <img src="images/music-7482317_960_720.png" alt="Vinyl" id="vinyl" class="vinyl spin">
-    <div class="controls">
-      <button id="prev">◀</button>
-      <button id="play">❙❙</button>
-      <button id="next">▶▶</button>
-    </div>
-    <div class="progress"><div class="progress-bar" id="progress-bar" role="progressbar"></div></div>
-    <div id="now-playing" style="margin-top: 10px; font-weight: bold; color: #d60087;">Now Playing: Blue Yung Kai</div>
+<div class="player-section">
+  <img src="https://cdn.pixabay.com/photo/2022/09/27/08/08/music-7482317_960_720.png"
+       alt="Vinyl" id="vinyl" class="vinyl spin">
+  <div class="controls">
+    <button id="prev">◀</button>
+    <button id="play">❙❙</button>
+    <button id="next">▶▶</button>
   </div>
+  <div class="progress">
+    <div class="progress-bar" id="progress-bar" role="progressbar"></div>
+  </div>
+  <div id="now-playing" style="margin-top:10px;font-weight:bold;color:#d60087;">
+    Now Playing: Blue Yung Kai
+  </div>
+</div>
+
 
   <div class="text-center mt-4">
     <a href="letter.html" class="btn btn-pink-cute">Previous Page</a>
